@@ -13,7 +13,7 @@ from homeassistant.components.media_player import (
     SUPPORT_PREVIOUS_TRACK, SUPPORT_VOLUME_MUTE, SUPPORT_VOLUME_SET,
     SUPPORT_SELECT_SOURCE, SUPPORT_PLAY, MediaPlayerDevice, PLATFORM_SCHEMA)
 from homeassistant.const import (
-    CONF_HOST, STATE_IDLE, STATE_PLAYING, STATE_UNKNOWN, STATE_HOME)
+    CONF_HOST, STATE_IDLE, STATE_PLAYING, STATE_UNKNOWN, STATE_HOME, SUPPORT_TURN_ON)
 import homeassistant.helpers.config_validation as cv
 
 REQUIREMENTS = ['python-roku==3.1.5']
@@ -26,9 +26,10 @@ NOTIFICATION_TITLE = 'Roku Media Player Setup'
 
 _LOGGER = logging.getLogger(__name__)
 
-SUPPORT_ROKU = SUPPORT_PREVIOUS_TRACK | SUPPORT_NEXT_TRACK |\
-    SUPPORT_PLAY_MEDIA | SUPPORT_VOLUME_SET | SUPPORT_VOLUME_MUTE |\
-    SUPPORT_SELECT_SOURCE | SUPPORT_PLAY
+SUPPORT_ROKU = SUPPORT_TURN_ON | SUPPORT_TURN_OFF | SUPPORT_PAUSE |\
+    SUPPORT_PREVIOUS_TRACK | SUPPORT_NEXT_TRACK | SUPPORT_PLAY_MEDIA |\
+    SUPPORT_VOLUME_SET | SUPPORT_VOLUME_MUTE | SUPPORT_SELECT_SOURCE |\
+    SUPPORT_PLAY
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Optional(CONF_HOST): cv.string,
@@ -209,6 +210,18 @@ class RokuDevice(MediaPlayerDevice):
         """Send previous track command."""
         if self.current_app is not None:
             self.roku.reverse()
+
+    def turn_on(self):
+        """Turn the media player on."""
+        import pdb; pdb.set_trace()
+
+    def turn_off(self):
+        """Turn off media player."""
+        import pdb; pdb.set_trace()
+
+    def media_pause(self):
+        """Send media pause command to media player."""
+        import pdb; pdb.set_trace()
 
     def media_next_track(self):
         """Send next track command."""
